@@ -143,6 +143,22 @@ The preferred method of writing commit messages is:
 This method works well with tools like: `git log --pretty=oneline`
 
 
+## Git remote origin on a flash key
+
+- git init, add and commit a repo in your local directory
+- cd into the USB key (e.g. `cd /Volumes/Squirrel/Python`)
+- `git init --bare myrepo.git`
+- cd back to local repo
+- `git push --set-upstream /Volumes/NUT/Python/myrepo.git/ master`
+- `git remote add usb /Volumes/NUT/Python/myrepo.git`
+- `git push usb master`
+
+To clone that repo somewhere else:
+```
+git clone /Volumes/NUT/Python/myrepo.git
+```
+
+
 # Git & Github
 
 Note that your commits won't register on Github's heatmap unless you're using the same email address. To set up your commit name and email address:  
@@ -241,19 +257,4 @@ If you forgot to include a file in a commit:
 ```
 git add missed-file.py
 git commit --amend
-```
-
-## Git remote origin on a flash key
-
-- git init, add and commit a repo in your local directory
-- cd into the USB key (e.g. `cd /Volumes/Squirrel/Python`)
-- `git init --bare myrepo.git`
-- cd back to local repo
-- `git push --set-upstream /Volumes/NUT/Python/myrepo.git/ master`
-- `git remote add usb /Volumes/NUT/Python/myrepo.git`
-- `git push usb master`
-
-To clone that repo somewhere else:
-```
-git clone /Volumes/NUT/Python/myrepo.git
 ```
