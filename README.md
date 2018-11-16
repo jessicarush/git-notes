@@ -202,6 +202,11 @@ An example system I could get behind:
 **Test:** Adding or modifying tests  
 **Update:** Changes related to updating external tools/libraries  
 
+For my repos that are notes & examples I'm also going to use:
+
+**Add:** New examples, explanations or material added.
+**Rename:** A file has been renamed to better reflect the topic
+
 
 ### Amending commit messages
 
@@ -210,7 +215,7 @@ If you made a mistake in your last commit message and you haven't pushed yet, yo
 1. Use `git rebase -i HEAD~n` command to display a list of the last *n* commits in your default text editor.
 2. For each commit message you want to edit, change the word *pick* to *reword* then save and close the file.
 3. This will then open each commit message file for you to edit and save.
-4. When it's all done, force push the amended commits with `git-push --force`
+4. When it's all done, force push the amended commits with `git push --force`
 
 Be aware that amending the commit message will result in a new commit with a new ID. For more information see [Github's article](https://help.github.com/articles/changing-a-commit-message/.)
 
