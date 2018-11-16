@@ -1,11 +1,30 @@
 # Git Notes
 
-
-## Resources
+These are some very brief and imperfect notes on working with git and github. For more thorough information see:
 
 [Complete list of git commands](https://git-scm.com/docs ).  
 [Git explained with D3](https://onlywei.github.io/explain-git-with-d3/).  
 
+## Table of Contents
+
+<!-- toc -->
+
+- [Basic commands](#basic-commands)
+- [Reset, Checkout, Revert](#reset-checkout-revert)
+  * [Reset](#reset)
+  * [Checkout](#checkout)
+    + [If you wan to look at all the files:](#if-you-wan-to-look-at-all-the-files)
+    + [If you want to look at a single file:](#if-you-want-to-look-at-a-single-file)
+    + [Alternate syntax:](#alternate-syntax)
+  * [Revert](#revert)
+- [Branch](#branch)
+- [.gitignore](#gitignore)
+- [Commit messages](#commit-messages)
+  * [Amending commit messages](#amending-commit-messages)
+- [Git remote origin on a flash key](#git-remote-origin-on-a-flash-key)
+- [Git & Github](#git--github)
+
+<!-- tocstop -->
 
 ## Basic commands
 
@@ -26,7 +45,7 @@ In the command line, make sure you're in the directory you want to repo first.
 `git log --pretty=oneline`  –– shows your commit log formatted as one line with full length commithash  
 
 
-## Checkout, Reset, Revert
+## Reset, Checkout, Revert
 
 These three commands will let you temporarily look back at earlier commits, reset to a previous commit, remove commits from the log or revert individual files to previous commit states.
 
@@ -170,7 +189,7 @@ git clone /Volumes/NUT/Python/myrepo.git
 ```
 
 
-# Git & Github
+## Git & Github
 
 Note that your commits won't register on Github's heatmap unless you're using the same email address. To set up your commit name and email address:  
 ```
