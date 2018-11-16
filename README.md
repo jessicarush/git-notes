@@ -204,8 +204,8 @@ An example system I could get behind:
 
 For my repos that are notes & examples I'm also going to use:
 
-**Add:** New examples, explanations or material added.
-**Rename:** A file has been renamed to better reflect the topic
+**Add:** New examples, explanations or material added.  
+**Rename:** A file has been renamed to better reflect the topic  
 
 
 ### Amending commit messages
