@@ -18,7 +18,7 @@ In the command line, make sure you're in the directory you want to repo first.
 `git reset filename.txt`  –– remove a staged file  
 `git commit`  –– takes you to your editor to write a commit comment. Once you save and close the file, the commit will complete  
 `git commit -m 'My comments'`  –– commits right away using the commit comments in quotes  
-`git commit --amend`  –– opens an editor to allow you to make changes to your last commit message.  
+`git commit --amend`  –– opens an editor to allow you to make changes to your last commit message (not pushed to github yet).  
 `git diff`  –– will show a basic diff of the files  
 `git difftools`  –– to look into - will do a diff using a better tool  
 `git log`  –– shows your commit log  
@@ -140,7 +140,18 @@ The preferred method of writing commit messages is:
 2. The second line should be blank
 3. The rest can be formatted however you like
 
-This method works well with tools like: `git log --pretty=oneline`
+This method works well with: `git log --pretty=oneline`
+
+### Amending commit messages
+
+If you made a mistake in your last commit message and you haven't pushed yet, you can use the --amend flag noted above. If you notice mistakes in old commit messages do this:
+
+1. Use `git rebase -i HEAD~n` command to display a list of the last *n* commits in your default text editor.
+2. For each commit message you want to edit, change the word *pick* to *reword* then save and close the file.
+3. This will then open each commit message file for you to edit and save.
+4. When it's all done, force push the amended commits with `git-push --force`
+
+Be aware that amending the commit message will result in a new commit with a new ID. For more information see [Github's article](https://help.github.com/articles/changing-a-commit-message/.)
 
 
 ## Git remote origin on a flash key
@@ -204,7 +215,7 @@ Then push to your master branch:
 git push -u origin master
 ```
 
-Note, the above requires that you have a master branch already created on
+The above requires that you have a master branch already created on
 github. If not you'll need to enter the following. You'll be prompted for a username and password (unless you set up SSH).
 ```
 git push --set-upstream origin master
@@ -239,11 +250,6 @@ git reset --hard origin/master
 To force a push
 ```
 git push origin <your_branch_name> --force
-```
-
-or if you have a specific repo:
-```
-git push https://git... --force
 ```
 
 If you want to rename a branch:
