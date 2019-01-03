@@ -199,7 +199,7 @@ An example system I could get behind:
 **Style:** Changes that do not affect the meaning of the code (e.g. white-space, formatting, etc)  
 **Refactor:** A code change that neither fixes a bug nor adds a feature  
 **Perf:** A code change that improves performance  
-**Test:** Adding missing tests  
+**Test:** Adding or modifying tests  
 **Update:** Changes related to updating external tools/libraries  
 
 
