@@ -51,6 +51,7 @@ In the command line, make sure you're in the directory you want to repo first.
 `git fetch`  –– fetches data from the remote repository to the local repository  
 `git merge`  –– merges the data from the local repository into the working directory  
 `git pull`  –– (fetch + merge) fetches data from the remote repository to the local repository and then merges it to the working directory  
+- THIS IS A TEST -
 
 
 ## Reset, Checkout, Revert
