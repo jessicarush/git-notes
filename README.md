@@ -2,9 +2,10 @@
 
 These are some very brief and imperfect notes on working with git and github. For more thorough information see:
 
-[How to teach Git](https://rachelcarmena.github.io/2018/12/12/how-to-teach-git.html)  
-[Pro Git Book](https://git-scm.com/book/en/v2)
+=
+[Pro Git Book](https://git-scm.com/book/en/v2)  
 [Complete list of git commands](https://git-scm.com/docs ).  
+[How to teach Git](https://rachelcarmena.github.io/2018/12/12/how-to-teach-git.html)  
 [Git explained with D3](https://onlywei.github.io/explain-git-with-d3/).  
 
 
@@ -357,14 +358,14 @@ git push --set-upstream origin master
 ## Git remote origin on a flash key
 
 - git init, add and commit a repo in your local directory
-- cd into the USB key (e.g. `cd /Volumes/Squirrel/Python`)
+- cd into the USB flash key (e.g. `cd /Volumes/flash_key_name/Python`)
 - `git init --bare myrepo.git`
 - cd back to local repo
-- `git push --set-upstream /Volumes/NUT/Python/myrepo.git/ master`
-- `git remote add usb /Volumes/NUT/Python/myrepo.git`
+- `git push --set-upstream /Volumes/flash_key_name/Python/myrepo.git/ master`
+- `git remote add usb /Volumes/flash_key_name/Python/myrepo.git`
 - `git push usb master`
 
 To clone that repo somewhere else:
 ```
-git clone /Volumes/NUT/Python/myrepo.git
+git clone /Volumes/flash_key_name/Python/myrepo.git
 ```
