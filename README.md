@@ -2,6 +2,7 @@
 
 These are some very brief and imperfect notes on working with git and github. For more thorough information see:
 
+[How to teach Git](https://rachelcarmena.github.io/2018/12/12/how-to-teach-git.html) *- really good!*  
 [Complete list of git commands](https://git-scm.com/docs ).  
 [Git explained with D3](https://onlywei.github.io/explain-git-with-d3/).  
 
@@ -33,16 +34,23 @@ In the command line, make sure you're in the directory you want to repo first.
 `git init`  –– creates a new repo  
 `git add -A`  –– adds all files, (new, modified and deleted) to the staging area  
 `git add .`  –– adds all files, (new, modified) to the staging area  
+`git add filename.txt`  –– adds a file to the staging area  
 `git status`  –– shows you the staging area  
 `git reset filename.txt`  –– remove a staged file  
 `git commit`  –– takes you to your editor to write a commit comment. Once you save and close the file, the commit will complete  
 `git commit -m 'My comments'`  –– commits right away using the commit comments in quotes  
 `git commit --amend`  –– opens an editor to allow you to make changes to your last commit message (not pushed to github yet).  
-`git diff`  –– will show a basic diff of the files  
+`git diff`  –– will show a basic diff of the modified files in the working directory  
+`git diff --staged`  –– show changes of a file in the staged area  
+`git diff <commit>^!`  –– show changes in a commit  
 `git difftools`  –– to look into - will do a diff using a better tool  
 `git log`  –– shows your commit log  
 `git log --oneline`  –– shows your commit log formatted as one line, with a shortened commithash  
 `git log --pretty=oneline`  –– shows your commit log formatted as one line with full length commithash  
+`git push`  –– pushes data from the local repository to the remote repository  
+`git fetch`  –– fetches data from the remote repository to the local repository  
+`git merge`  –– merges the data from the local repository into the working directory  
+`git pull`  –– (fetch + merge) fetches data from the remote repository to the local repository and then merges it to the working directory  
 
 
 ## Reset, Checkout, Revert
@@ -54,9 +62,9 @@ These three commands will let you temporarily look back at earlier commits, rese
 
 Reset is the simplest if you want to revert all your files to an earlier commit and/or remove commits from your commit history. You have two main options using reset:
 
-`git reset [commit]`  –– this uses the default mode `--mixed` which removes all commits after [commit] in the history but preserves any changes made to your local files. If you do a `git status`, it will show as *changes not staged for commit*.  
+`git reset [commit]`  –– this uses the default mode `--mixed` which removes all commits after [commit] in the history but preserves any changes made to your local files. If you do a `git status`, it will show as *changes not staged for commit*. As mentioned above `git reset filename.txt` is also a quick way to remove a file from the staging area.  
 
-`git reset --soft [commit]`  –– is the same as above except all changes since [commit] will be stages and waiting for a new commit.  
+`git reset --soft [commit]`  –– is the same as above except all changes since [commit] will be staged and waiting for a new commit.  
 
 `git reset --hard [commit]`  –– **BE CAREFUL** removes all commits after [commit] AND reverts local files back to what they were at the specified [commit]
 
@@ -234,6 +242,8 @@ To clone that repo somewhere else:
 ```
 git clone /Volumes/NUT/Python/myrepo.git
 ```
+
+
 
 
 ## Git & Github
