@@ -2,15 +2,18 @@
 
 These are some very brief and imperfect notes on working with git and github. For more thorough information see:
 
-[How to teach Git](https://rachelcarmena.github.io/2018/12/12/how-to-teach-git.html) *- really good!*  
+[How to teach Git](https://rachelcarmena.github.io/2018/12/12/how-to-teach-git.html)  
+[Pro Git Book](https://git-scm.com/book/en/v2)
 [Complete list of git commands](https://git-scm.com/docs ).  
 [Git explained with D3](https://onlywei.github.io/explain-git-with-d3/).  
+
 
 ## Table of Contents
 
 <!-- toc -->
 
 - [Basic commands](#basic-commands)
+- [Fetch and Merge](#fetch-and-merge)
 - [Reset, Checkout, Revert](#reset-checkout-revert)
   * [Reset](#reset)
   * [Checkout](#checkout)
@@ -19,11 +22,14 @@ These are some very brief and imperfect notes on working with git and github. Fo
     + [Alternate syntax:](#alternate-syntax)
   * [Revert](#revert)
 - [Branch](#branch)
+- [Rebase](#rebase)
+- [Stashing](#stashing)
+- [Force Push and Pull](#force-push-and-pull)
 - [.gitignore](#gitignore)
 - [Commit messages](#commit-messages)
   * [Amending commit messages](#amending-commit-messages)
-- [Git remote origin on a flash key](#git-remote-origin-on-a-flash-key)
 - [Git & Github](#git--github)
+- [Git remote origin on a flash key](#git-remote-origin-on-a-flash-key)
 
 <!-- tocstop -->
 
@@ -34,12 +40,12 @@ In the command line, make sure you're in the directory you want to repo first.
 `git init`  –– creates a new repo  
 `git add -A`  –– adds all files, (new, modified and deleted) to the staging area  
 `git add .`  –– adds all files, (new, modified) to the staging area  
-`git add filename.txt`  –– adds a file to the staging area  
+`git add filename.txt`  –– adds a specific file to the staging area  
 `git status`  –– shows you the staging area  
 `git reset filename.txt`  –– remove a staged file  
 `git commit`  –– takes you to your editor to write a commit comment. Once you save and close the file, the commit will complete  
 `git commit -m 'My comments'`  –– commits right away using the commit comments in quotes  
-`git commit --amend`  –– opens an editor to allow you to make changes to your last commit message (not pushed to github yet).  
+`git commit --amend`  –– lets you include a file you forgot to include in the last commit (provided it hasn't been pushed yet). You need to add the file first with `git add filename.txt`. You can also run this command alone to make changes to your last commit message (again, provided it hasn't been pushed yet).  
 `git diff`  –– will show a basic diff of the modified files in the working directory  
 `git diff --staged`  –– show changes of a file in the staged area  
 `git diff <commit>^!`  –– show changes in a commit  
@@ -51,7 +57,21 @@ In the command line, make sure you're in the directory you want to repo first.
 `git fetch`  –– fetches data from the remote repository to the local repository  
 `git merge`  –– merges the data from the local repository into the working directory  
 `git pull`  –– (fetch + merge) fetches data from the remote repository to the local repository and then merges it to the working directory  
-- THIS IS A TEST -
+
+
+## Fetch and Merge
+
+As noted above `fetch` and `merge` are two separate steps that make up a `pull`. Most of the time `pull` is all you need but doing these steps separately allows you to:
+
+View a commits diffs before merging, for example:
+```
+git fetch
+From https://github.com/jessicarush/git-notes
+   8b684ad..4f87800  master     -> origin/master
+
+git diff 4f87800^!
+git merge
+```  
 
 
 ## Reset, Checkout, Revert
@@ -139,13 +159,67 @@ a114858 Initial commit
 
 ## Branch
 
+Create a new branch and switch over to it:
+```
+git branch new_features
+git checkout new_features
+```
+
+Make your changes as you normally would, `add` and `commit` as normal.
+To push your new branch to your remote repo:
+```
+git push --set--upstream origin new_features
+```
+
+If you want to rename a branch:
+```
+git branch -m old-name new-name
+git push origin --delete old-name
+git push origin new-name
+```
+
+When ready to merge your branch into the master branch:
+```
+git checkout master
+git merge new_features
+git push
+```
+
+**Summary:**
+
 `git branch refactoring`  –– creates a new branch called 'refactoring'  
 `git checkout refactoring`  –– moves over to the new branch and updates the working directory  
 `git checkout -b refactoring`  –– creates a new branch and move over to it in one step.  
-`git push --set-upstream origin refactoring`  –– to add your new branch to the the origin (github)  
+`git push --set-upstream origin refactoring`  –– add your new branch to the the remote repo  
 `git pull origin refactoring`  –– to pull from a branch  
-`git branch`  –– display the names of all the branches  
+`git branch`  –– display the names of all the branches (the starred one is your current one)  
 `git merge refactoring`  –– merge the branch into the branch you are currently in (for example: `git checkout master` first)
+
+
+## Rebase
+
+coming soon...
+
+`git pull --rebase`  –– instead of performing a regular `fetch` + `merge`, this will do a `fetch` + `rebase`  
+
+
+## Stashing
+
+coming soon...
+
+
+## Force Push and Pull
+
+To force a pull (and overwrite local diffs):
+```
+git fetch --all
+git reset --hard origin/master
+```
+
+To force a push (and overwrite remote diffs)
+```
+git push origin <your_branch_name> --force
+```
 
 
 ## .gitignore
@@ -229,6 +303,57 @@ If you made a mistake in your last commit message and you haven't pushed yet, yo
 Be aware that amending the commit message will result in a new commit with a new ID. For more information see [Github's article](https://help.github.com/articles/changing-a-commit-message/.)
 
 
+## Git & Github
+
+Note: your commits won't register on Github's heatmap unless you're using the same email address. To set up your commit name and email address:  
+```
+git config --global user.email "email@example.com"
+git config --global user.name "Your Name"
+```
+
+To confirm that you have set the email address correctly:
+```
+git config --global user.email
+email@example.com
+```
+
+To show the remote repository connected to your current working directory:
+```
+git remote show origin
+```
+
+To create a clone of a github repository:
+```
+git clone https://github.com/USERNAME/REPOSITORY
+```
+
+To link an existing local repo to a github repo:
+```
+$ git remote add origin https://github.com/USERNAME/REPOSITORY.git
+```
+
+FYI: If you've added your public SSH keys to your github account:
+```
+git remote add origin git@github.com:USERNAME/REPOSITORY.git
+```
+
+Note: if you want to change the origin, edit the config file in the `.git` directory or you can run the command to delete the old origin, then add the new one with above command:
+```
+git remote remove origin
+```
+
+Be sure to push to your master branch after changing the remote:
+```
+git push -u origin master
+```
+
+The above requires that you have a master branch already created on
+github. If not you'll need to enter the following. You'll be prompted for a username and password (unless you set up SSH).
+```
+git push --set-upstream origin master
+```
+
+
 ## Git remote origin on a flash key
 
 - git init, add and commit a repo in your local directory
@@ -242,102 +367,4 @@ Be aware that amending the commit message will result in a new commit with a new
 To clone that repo somewhere else:
 ```
 git clone /Volumes/NUT/Python/myrepo.git
-```
-
-
-
-
-## Git & Github
-
-Note that your commits won't register on Github's heatmap unless you're using the same email address. To set up your commit name and email address:  
-```
-git config --global user.email "email@example.com"
-git config --global user.name "Your Name"
-```
-
-To confirm that you have set the email address correctly:
-```
-git config --global user.email
-email@example.com
-```
-
-To show the current remote of a local github repo:
-```
-git remote show origin
-```
-
-To create a clone of a github repo:
-```
-git clone https://github.com/USERNAME/REPOSITORY
-```
-
-To link an existing local repo to github repo:
-```
-$ git remote add origin https://github.com/USERNAME/REPOSITORY.git
-```
-
-If you've added your public SSH keys to your github account:
-```
-git remote add origin git@github.com:USERNAME/REPOSITORY.git
-```
-
-Note, if you want to change the origin, edit the config file in the `.git`
-directory or run the command to delete the old origin, then add the new one:
-```
-git remote remove origin
-```
-
-Then push to your master branch:
-```
-git push -u origin master
-```
-
-The above requires that you have a master branch already created on
-github. If not you'll need to enter the following. You'll be prompted for a username and password (unless you set up SSH).
-```
-git push --set-upstream origin master
-```
-
-Create a new branch and switch over to it:
-```
-git branch new_features
-git checkout new_features
-```
-
-Make your changes as you normally would.
-Git add and commit as normal.
-To push your new branch to github:
-```
-git push --set--upstream origin new_features
-```
-
-When ready to merge your branch back into master:
-```
-git checkout master
-git merge new_features
-git push
-```
-
-To force a pull (and overwrite and local changes):
-```
-git fetch --all
-git reset --hard origin/master
-```
-
-To force a push
-```
-git push origin <your_branch_name> --force
-```
-
-If you want to rename a branch:
-```
-git branch -m old-name new-name
-git push origin --delete old-name
-git push origin new-name
-```
-
-If you forgot to include a file in a commit:
-```
-git add missed-file.py
-git commit --amend
 ```
