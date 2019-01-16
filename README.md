@@ -2,7 +2,6 @@
 
 These are some very brief and imperfect notes on working with git and github. For more thorough information see:
 
-=
 [Pro Git Book](https://git-scm.com/book/en/v2)  
 [Complete list of git commands](https://git-scm.com/docs ).  
 [How to teach Git](https://rachelcarmena.github.io/2018/12/12/how-to-teach-git.html)  
