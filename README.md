@@ -17,7 +17,7 @@ These are some very brief and imperfect notes on working with git and github. Fo
 - [Reset, Checkout, Revert](#reset-checkout-revert)
   * [Reset](#reset)
   * [Checkout](#checkout)
-    + [If you wan to look at all the files:](#if-you-wan-to-look-at-all-the-files)
+    + [If you want to look at all the files:](#if-you-want-to-look-at-all-the-files)
     + [If you want to look at a single file:](#if-you-want-to-look-at-a-single-file)
     + [Alternate syntax:](#alternate-syntax)
   * [Revert](#revert)
@@ -27,7 +27,9 @@ These are some very brief and imperfect notes on working with git and github. Fo
 - [Force Push and Pull](#force-push-and-pull)
 - [.gitignore](#gitignore)
 - [Commit messages](#commit-messages)
+  * [Categories](#categories)
   * [Amending commit messages](#amending-commit-messages)
+  * [Summary:](#summary)
 - [Git & Github](#git--github)
 - [Git remote origin on a flash key](#git-remote-origin-on-a-flash-key)
 
@@ -96,7 +98,7 @@ If you're not sure which commit you want to reset to, use `git checkout` first. 
 
 While this is mainly used for switching branches, `checkout` also lets you look at your files as they were at a particular [commit]. You can *check out* all your files or just a single file. The process is a little different depending on which you're doing. Note that unlike `reset`, checkout does not remove any commits from the commit history.
 
-#### If you wan to look at all the files:
+#### If you want to look at all the files:
 
 `git checkout [commit]`  –– temporarily reverts all local files to [commit]  
 
@@ -134,7 +136,7 @@ Note that when indicating a commit to checkout to, you can also use this syntax:
 `git checkout HEAD~2`  –– checkout two parent commits ago  
 `git checkout HEAD~2 filename.txt`  –– checkout a file from two parent commits ago  
 
-You can also use `^` to differentiate between merged branch parents, bit tbh I find it to be a little confusing. [Here's an explanation](http://www.paulboxley.com/blog/2011/06/git-caret-and-tilde) but I'm sticking with commit hashes.
+You can also use `^` to differentiate between merged branch parents, but tbh I find it a little confusing. [Here's an explanation](http://www.paulboxley.com/blog/2011/06/git-caret-and-tilde) but I'm sticking with commit hashes.
 
 
 ### Revert
@@ -263,14 +265,7 @@ Some further recommendations for writing commit messages:
 [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
 [Commit Message Guidelines](https://gist.github.com/abravalheri/34aeb7b18d61392251a2)
 
-Highlights:
-- Separate subject from body with a blank line
-- Limit the subject line to 50 characters
-- Capitalize the subject line
-- Do not end the subject line with a period
-- Use the imperative mood in the subject line
-- Wrap the body at 72 characters
-- Use the body to explain what and why vs. how
+### Categories
 
 Some projects also include a short reference word at the start of the summary line to indicate the type of change. An example of this is seen in the [pandas repo](https://github.com/pandas-dev/pandas).
 
@@ -303,9 +298,20 @@ If you made a mistake in your last commit message and you haven't pushed yet, yo
 Be aware that amending the commit message will result in a new commit with a new ID. For more information see [Github's article](https://help.github.com/articles/changing-a-commit-message/.)
 
 
+### Summary:
+
+- Separate subject from body with a blank line
+- Limit the subject line to 50 characters
+- Capitalize the subject line
+- Do not end the subject line with a period
+- Use the imperative mood in the subject line
+- Wrap the body at 72 characters
+- Use the body to explain what and why vs. how
+
+
 ## Git & Github
 
-Note: your commits won't register on Github's heatmap unless you're using the same email address. To set up your commit name and email address:  
+Add your Github name and email address (note: your email here must match the primary one you have set on your Github account in order for your commits to register on their heatmap):  
 ```
 git config --global user.email "email@example.com"
 git config --global user.name "Your Name"
