@@ -271,19 +271,19 @@ Some projects also include a short reference word at the start of the summary li
 
 An example system I could get behind:
 
-**Feature:** A new feature  
-**Fix:** A bug fix  
-**Docs:** Documentation changes only  
-**Style:** Changes that do not affect the meaning of the code (e.g. white-space, formatting, etc)  
-**Refactor:** A code change that neither fixes a bug nor adds a feature  
-**Perf:** A code change that improves performance  
-**Test:** Adding or modifying tests  
-**Update:** Changes related to updating external tools/libraries  
+**Feature:** a new feature  
+**Fix:** a bug fix  
+**Docs:** documentation changes only  
+**Style:** changes that do not affect the meaning of the code (e.g. white-space, formatting, etc)  
+**Refactor:** a code change that neither fixes a bug nor adds a feature  
+**Perf:** a code change that improves performance  
+**Test:** adding or modifying tests  
+**Update:** changes related to updating external tools/libraries  
 
-For my repos that are notes & examples I'm also going to use:
+For my notes & examples repos, I'm also going to use:
 
-**Add:** New examples, explanations or material added.  
-**Rename:** A file has been renamed to better reflect the topic  
+**Add:** new examples, explanations or material added.  
+**Rename:** a file has been renamed to better reflect the topic  
 
 
 ### Amending commit messages
