@@ -3,9 +3,9 @@
 These are some very brief and imperfect notes on working with git and github. For more thorough information see:
 
 [Pro Git Book](https://git-scm.com/book/en/v2)  
-[Complete list of git commands](https://git-scm.com/docs ).  
+[Complete list of git commands](https://git-scm.com/docs )  
 [How to teach Git](https://rachelcarmena.github.io/2018/12/12/how-to-teach-git.html)  
-[Git explained with D3](https://onlywei.github.io/explain-git-with-d3/).  
+[Git explained with D3](https://onlywei.github.io/explain-git-with-d3/)  
 
 
 ## Table of Contents
@@ -17,8 +17,8 @@ These are some very brief and imperfect notes on working with git and github. Fo
 - [Reset, Checkout, Revert](#reset-checkout-revert)
   * [Reset](#reset)
   * [Checkout](#checkout)
-    + [If you want to look at all the files:](#if-you-want-to-look-at-all-the-files)
-    + [If you want to look at a single file:](#if-you-want-to-look-at-a-single-file)
+    + [If you want to look at all the files](#if-you-want-to-look-at-all-the-files)
+    + [If you want to look at a single file](#if-you-want-to-look-at-a-single-file)
     + [Alternate syntax:](#alternate-syntax)
   * [Revert](#revert)
 - [Branch](#branch)
@@ -98,7 +98,7 @@ If you're not sure which commit you want to reset to, use `git checkout` first. 
 
 While this is mainly used for switching branches, `checkout` also lets you look at your files as they were at a particular [commit]. You can *check out* all your files or just a single file. The process is a little different depending on which you're doing. Note that unlike `reset`, checkout does not remove any commits from the commit history.
 
-#### If you want to look at all the files:
+#### If you want to look at all the files
 
 `git checkout [commit]`  –– temporarily reverts all local files to [commit]  
 
@@ -119,7 +119,7 @@ git merge mybranch
 
 Depending on your changes, you will likely have merge conflicts so you'll have to resolve them carefully before moving on. For this reason, consider whether you want to keep those later commits in the master branch that you moved in front of. It may make more sense to reset, then branch off.
 
-#### If you want to look at a single file:
+#### If you want to look at a single file
 
 `git checkout [commit] filename.txt`  –– reverts a file to [commit]  
 
@@ -298,7 +298,7 @@ If you made a mistake in your last commit message and you haven't pushed yet, yo
 Be aware that amending the commit message will result in a new commit with a new ID. For more information see [Github's article](https://help.github.com/articles/changing-a-commit-message/.)
 
 
-### Summary:
+### Summary
 
 - Separate subject from body with a blank line
 - Limit the subject line to 50 characters
