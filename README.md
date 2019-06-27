@@ -170,7 +170,7 @@ git checkout new_features
 Make your changes as you normally would, `add` and `commit` as normal.
 To push your new branch to your remote repo:
 ```
-git push --set--upstream origin new_features
+git push -u origin new_features
 ```
 
 If you want to rename a branch:
