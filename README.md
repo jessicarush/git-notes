@@ -187,6 +187,21 @@ git merge new_features
 git push
 ```
 
+To list all your branches (local & remote):
+```
+git branch -a
+```
+
+To delete a local branch:
+```
+git branch -d branch_name
+```
+
+To delete a remote branch:
+```
+git push origin --delete branch_name
+```
+
 **Summary:**
 
 `git branch refactoring`  –– creates a new branch called 'refactoring'  
