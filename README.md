@@ -241,8 +241,8 @@ git push origin <your_branch_name> --force
 
 ## .gitignore
 
-To have git ignore files or folders, create a file in the project root directory (where your `.git` folder lives) called `.gitignore` – then add a line for each file or folder you want to ignore
-for example:
+To have git ignore files or folders, create a file in the project root directory (where your `.git` folder lives) called `.gitignore` – then add a line for each file or folder you want to ignore, for example:
+
 ```
 __pycache__
 .DS_Store
@@ -251,6 +251,16 @@ venv
 working_files
 ```
 
+Note if you add a new file to your git ignore that was previously being tracked, you will need to remove it from the index:
+
+```
+git rm --cached <file>
+```
+
+If you want to remove a whole directory, you need to remove all files in it recursively:
+```
+git rm -r --cached <directory>
+```
 
 ## Commit messages
 
