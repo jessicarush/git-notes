@@ -334,7 +334,7 @@ Be aware that amending the commit message will result in a new commit with a new
 - Use the body to explain what and why vs. how
 
 
-## Git & Github
+## Git, Github, Commit infomation
 
 Add your Github name and email address (note: your email here must match the primary one you have set on your Github account in order for your commits to register on their heatmap):  
 ```
@@ -345,6 +345,18 @@ git config --global user.name "Your Name"
 To confirm that you have set the email address correctly:
 ```
 git config --global user.email
+email@example.com
+```
+
+If you want to change your name and email for a local repository only, navigate to the directory containing the git directory:
+```
+git config user.email "email@example.com"
+git config user.name "Your Name"
+```
+
+To confirm that you have set the email address correctly:
+```
+git config user.email
 email@example.com
 ```
 
