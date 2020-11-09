@@ -35,6 +35,7 @@ These are some very brief and imperfect notes on working with git and github. Fo
 
 <!-- tocstop -->
 
+
 ## Basic commands
 
 In the command line, make sure you're in the directory you want to repo first.
@@ -59,6 +60,7 @@ In the command line, make sure you're in the directory you want to repo first.
 `git fetch`  –– fetches data from the remote repository to the local repository  
 `git merge`  –– merges the data from the local repository into the working directory  
 `git pull`  –– (fetch + merge) fetches data from the remote repository to the local repository and then merges it to the working directory  
+`git remote -v` –– show remote repository
 
 
 ## Fetch and Merge
@@ -262,6 +264,7 @@ If you want to remove a whole directory, you need to remove all files in it recu
 git rm -r --cached <directory>
 ```
 
+
 ## Commit messages
 
 The preferred method of writing commit messages is:
@@ -310,7 +313,6 @@ For my notes & examples repos, I'm also going to use:
 **Add:** new examples, explanations or material added.  
 **Rename:** a file has been renamed to better reflect the topic  
 
-
 ### Amending commit messages
 
 If you made a mistake in your last commit message and you haven't pushed yet, you can use the --amend flag noted above. If you notice mistakes in old commit messages do this:
@@ -321,7 +323,6 @@ If you made a mistake in your last commit message and you haven't pushed yet, yo
 4. When it's all done, force push the amended commits with `git push --force`
 
 Be aware that amending the commit message will result in a new commit with a new ID. For more information see [Github's article](https://help.github.com/articles/changing-a-commit-message/.)
-
 
 ### Summary
 
@@ -334,7 +335,7 @@ Be aware that amending the commit message will result in a new commit with a new
 - Use the body to explain what and why vs. how
 
 
-## Git, Github, Commit infomation
+## Git, Github, Commit information
 
 Add your Github name and email address (note: your email here must match the primary one you have set on your Github account in order for your commits to register on their heatmap):  
 ```
@@ -411,3 +412,62 @@ To clone that repo somewhere else:
 ```
 git clone /Volumes/flash_key_name/Python/myrepo.git
 ```
+
+
+## A Specific Process Example
+
+Different organizations will have their own preferred methods of managing git logs. This example is one such method aimed at doing pull requests of 1 commit.
+
+### Testing/editing locally
+
+- `git fetch`  
+- `git checkout origin/master`  
+- `git checkout -b CP-123-wip`  
+- `git branch -u origin/master`  
+
+Do work and commit as much as you want (no pushing), then:
+
+- `git pull`  
+- `git status` *(ahead by x commits)*  
+- `git rebase -i HEAD~x`  
+
+> Note if you were ahead by more than one commit, the rebase command will prompt you amend the commit message so that you can write it in the organizations preferred format e.g. `CP-123: This is my formal commit message`. If you were only ahead by 1 commit in the first place, don't bother rebasing but *do* amend your last commit message if necessary using `git commit --amend`.
+
+- `git status` *(ahead by 1 commit)*  
+- `git push origin HEAD:CP-123`  
+
+Repeat
+
+### Testing/editing locally and on a Raspberry Pi
+
+Assuming I've created a local branch using:  
+```
+git checkout -b CP-123-wip
+```
+
+And I'm following the master branch:  
+```
+git branch -u origin/master
+```
+
+If I want to test my current local branch's code on a raspberry pi:  
+```
+git push origin HEAD:CP-123-wip
+```
+
+On the raspberry pi, **clone the repository**, then:  
+```
+git checkout origin/CP-123-wip
+```
+
+If I want to make changes there on the pi, commit as normal then when ready:  
+```
+git push origin HEAD:CP-123-wip
+```
+
+Now locally you should be able to pull down those changes:  
+```
+git pull origin CP-123-wip
+```
+
+You can carry on editing back and forth between your local workspace and the pi using those two commands. When you're ready for a pull request, continue as normal with rebasing, etc.
