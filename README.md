@@ -29,12 +29,14 @@ These are some very brief and imperfect notes on working with git and github. Fo
 - [Commit messages](#commit-messages)
   * [Categories](#categories)
   * [Amending commit messages](#amending-commit-messages)
-  * [Summary:](#summary)
-- [Git & Github](#git--github)
+  * [Summary](#summary)
+- [Git and Github identity information](#git-and-github-identity-information)
 - [Git remote origin on a flash key](#git-remote-origin-on-a-flash-key)
+- [A Specific Process Example](#a-specific-process-example)
+  * [Testing/editing locally](#testingediting-locally)
+  * [Testing/editing locally and on a Raspberry Pi](#testingediting-locally-and-on-a-raspberry-pi)
 
 <!-- tocstop -->
-
 
 ## Basic commands
 
@@ -335,7 +337,7 @@ Be aware that amending the commit message will result in a new commit with a new
 - Use the body to explain what and why vs. how
 
 
-## Git, Github, Commit information
+## Git and Github identity information
 
 Add your Github name and email address (note: your email here must match the primary one you have set on your Github account in order for your commits to register on their heatmap):  
 ```
@@ -371,12 +373,17 @@ To create a clone of a github repository:
 git clone https://github.com/USERNAME/REPOSITORY
 ```
 
+If you've added your public SSH keys to your github account:
+```
+git clone git@github.com:USERNAME/REPOSITORY
+```
+
 To link an existing local repo to a github repo:
 ```
 $ git remote add origin https://github.com/USERNAME/REPOSITORY.git
 ```
 
-FYI: If you've added your public SSH keys to your github account:
+If you've added your public SSH keys to your github account:
 ```
 git remote add origin git@github.com:USERNAME/REPOSITORY.git
 ```
@@ -395,6 +402,25 @@ The above requires that you have a master branch already created on
 github. If not you'll need to enter the following. You'll be prompted for a username and password (unless you set up SSH).
 ```
 git push --set-upstream origin master
+```
+
+Finally, if you are trying to interact with a github repo and are still being asked to enter your username and password, you probably need to change the remote URL from HTTPS to SSH. To do this first check if you are using HTTPS:
+```
+git remote -v
+> origin  https://github.com/USERNAME/REPOSITORY.git (fetch)
+> origin  https://github.com/USERNAME/REPOSITORY.git (push)
+```
+
+Change your remote's URL from HTTPS to SSH with the `git remote set-url` command.
+```
+git remote set-url origin git@github.com:USERNAME/REPOSITORY.git
+```
+
+Verify that it's changed:
+```
+git remote -v
+> origin  git@github.com:USERNAME/REPOSITORY.git (fetch)
+> origin  git@github.com:USERNAME/REPOSITORY.git (push)
 ```
 
 
