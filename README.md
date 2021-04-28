@@ -35,6 +35,7 @@ These are some very brief and imperfect notes on working with git and github. Fo
 - [A Specific Process Example](#a-specific-process-example)
   * [Testing/editing locally](#testingediting-locally)
   * [Testing/editing locally and on a Raspberry Pi](#testingediting-locally-and-on-a-raspberry-pi)
+- [Miscellaneous commands](#miscellaneous-commands)
 
 <!-- tocstop -->
 
@@ -423,6 +424,11 @@ git remote -v
 > origin  git@github.com:USERNAME/REPOSITORY.git (push)
 ```
 
+You can test that SSH is set up properly to Github with this command:
+```
+ssh -T git@github.com
+```
+
 
 ## Git remote origin on a flash key
 
@@ -497,3 +503,15 @@ git pull origin CP-123-wip
 ```
 
 You can carry on editing back and forth between your local workspace and the pi using those two commands. When you're ready for a pull request, continue as normal with rebasing, etc.
+
+## Miscellaneous commands
+
+When copying files from linux or Mac OS to Windows, permissions on files may get changed. Git may register these as changes and all files will show as being modified. If you don't want this use the following command:
+```
+git config core.filemode false
+```
+
+or
+```
+git config --global core.filemode false
+```
