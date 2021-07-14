@@ -227,7 +227,35 @@ coming soon...
 
 ## Stashing
 
-coming soon...
+If you have un-staged, un-commited changes that you want to "save for later", you can stash them.
+```
+git stash save "my description"
+```
+
+To list your saved stashes:
+```
+git stash list
+```
+
+To retrieve at stash:
+```
+git stash apply stash@{0}
+```
+
+The stash will still be saved though. If you want to remove it from the saved list:
+```
+git stash drop stash@{0}
+```
+
+To remove all the saved stashes:
+```
+git stash clear
+```
+
+To apply and remove the last stash:
+```
+git stash pop
+```
 
 
 ## Force Push and Pull
