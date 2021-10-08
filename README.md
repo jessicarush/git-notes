@@ -237,6 +237,16 @@ To list your saved stashes:
 git stash list
 ```
 
+To show the diff of the most recent stash before applying:
+```
+git stash show -p
+```
+
+To show the diff of a specific stash before applying:
+```
+git stash show -p stash@{1}
+```
+
 To retrieve at stash:
 ```
 git stash apply stash@{0}
