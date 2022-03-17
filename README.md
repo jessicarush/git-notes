@@ -2,10 +2,10 @@
 
 These are some very brief and imperfect notes on working with git and github. For more thorough information see:
 
-[Pro Git Book](https://git-scm.com/book/en/v2)  
-[Complete list of git commands](https://git-scm.com/docs )  
-[How to teach Git](https://rachelcarmena.github.io/2018/12/12/how-to-teach-git.html)  
-[Git explained with D3](https://onlywei.github.io/explain-git-with-d3/)  
+- [Pro Git Book](https://git-scm.com/book/en/v2)
+- [Complete list of git commands](https://git-scm.com/docs )
+- [How to teach Git](https://rachelcarmena.github.io/2018/12/12/how-to-teach-git.html)
+- [Git explained with D3](https://onlywei.github.io/explain-git-with-d3/)
 
 
 ## Table of Contents
@@ -71,6 +71,7 @@ In the command line, make sure you're in the directory you want to repo first.
 As noted above `fetch` and `merge` are two separate steps that make up a `pull`. Most of the time `pull` is all you need but doing these steps separately allows you to:
 
 View a commits diffs before merging, for example:
+
 ```
 git fetch
 From https://github.com/jessicarush/git-notes
@@ -78,7 +79,7 @@ From https://github.com/jessicarush/git-notes
 
 git diff 4f87800^!
 git merge
-```  
+```
 
 
 ## Reset, Checkout, Revert
@@ -90,9 +91,9 @@ These three commands will let you temporarily look back at earlier commits, rese
 
 Reset is the simplest if you want to revert all your files to an earlier commit and/or remove commits from your commit history. You have two main options using reset:
 
-`git reset [commit]`  –– this uses the default mode `--mixed` which removes all commits after [commit] in the history but preserves any changes made to your local files. If you do a `git status`, it will show as *changes not staged for commit*. As mentioned above `git reset filename.txt` is also a quick way to remove a file from the staging area.  
+`git reset [commit]`  –– this uses the default mode `--mixed` which removes all commits after [commit] in the history but preserves any changes made to your local files. If you do a `git status`, it will show as *changes not staged for commit*. As mentioned above `git reset filename.txt` is also a quick way to remove a file from the staging area.
 
-`git reset --soft [commit]`  –– is the same as above except all changes since [commit] will be staged and waiting for a new commit.  
+`git reset --soft [commit]`  –– is the same as above except all changes since [commit] will be staged and waiting for a new commit.
 
 `git reset --hard [commit]`  –– **BE CAREFUL** removes all commits after [commit] AND reverts local files back to what they were at the specified [commit]
 
@@ -126,7 +127,7 @@ Depending on your changes, you will likely have merge conflicts so you'll have t
 
 #### If you want to look at a single file
 
-`git checkout [commit] filename.txt`  –– reverts a file to [commit]  
+`git checkout [commit] filename.txt`  –– reverts a file to [commit]
 
 The difference here when we just checkout a single file, is that we're NOT in a *detached head state* meaning it's pretty much business as usual. Your file has been reverted back to a previous commit so at this point you can do one of two things:
 
@@ -136,7 +137,7 @@ The difference here when we just checkout a single file, is that we're NOT in a 
 
 #### Alternate syntax:
 
-Note that when indicating a commit to checkout to, you can also use this syntax:  
+Note that when indicating a commit to checkout to, you can also use this syntax:
 
 `git checkout HEAD~2`  –– checkout two parent commits ago  
 `git checkout HEAD~2 filename.txt`  –– checkout a file from two parent commits ago  
@@ -167,6 +168,7 @@ a114858 Initial commit
 ## Branch
 
 Create a new branch and switch over to it:
+
 ```
 git branch new_features
 git checkout new_features
@@ -174,11 +176,13 @@ git checkout new_features
 
 Make your changes as you normally would, `add` and `commit` as normal.
 To push your new branch to your remote repo:
+
 ```
 git push -u origin new_features
 ```
 
 If you want to rename a branch:
+
 ```
 git branch -m old-name new-name
 git push origin --delete old-name
@@ -186,6 +190,7 @@ git push origin new-name
 ```
 
 When ready to merge your branch into the master branch:
+
 ```
 git checkout master
 git merge new_features
@@ -193,16 +198,19 @@ git push
 ```
 
 To list all your branches (local & remote):
+
 ```
 git branch -a
 ```
 
 To delete a local branch:
+
 ```
 git branch -d branch_name
 ```
 
 To delete a remote branch:
+
 ```
 git push origin --delete branch_name
 ```
@@ -222,47 +230,55 @@ git push origin --delete branch_name
 
 coming soon...
 
-`git pull --rebase`  –– instead of performing a regular `fetch` + `merge`, this will do a `fetch` + `rebase`  
+`git pull --rebase`  –– instead of performing a regular `fetch` + `merge`, this will do a `fetch` + `rebase`
 
 
 ## Stashing
 
 If you have un-staged, un-commited changes that you want to "save for later", you can stash them.
+
 ```
 git stash save "my description"
 ```
 
 To list your saved stashes:
+
 ```
 git stash list
 ```
 
 To show the diff of the most recent stash before applying:
+
 ```
 git stash show -p
 ```
 
 To show the diff of a specific stash before applying:
+
 ```
 git stash show -p stash@{1}
 ```
 
 To retrieve at stash:
+
 ```
 git stash apply stash@{0}
 ```
 
 The stash will still be saved though. If you want to remove it from the saved list:
+
 ```
 git stash drop stash@{0}
 ```
 
 To remove all the saved stashes:
+
 ```
 git stash clear
 ```
 
 To apply and remove the last stash:
+
 ```
 git stash pop
 ```
@@ -271,12 +287,14 @@ git stash pop
 ## Force Push and Pull
 
 To force a pull (and overwrite local diffs):
+
 ```
 git fetch --all
 git reset --hard origin/master
 ```
 
 To force a push (and overwrite remote diffs)
+
 ```
 git push origin <your_branch_name> --force
 ```
@@ -301,6 +319,7 @@ git rm --cached <file>
 ```
 
 If you want to remove a whole directory, you need to remove all files in it recursively:
+
 ```
 git rm -r --cached <directory>
 ```
@@ -309,6 +328,7 @@ git rm -r --cached <directory>
 ## Commit messages
 
 The preferred method of writing commit messages is:
+
 ```
 Capitalized, short (50 chars or less) summary
 
@@ -331,8 +351,9 @@ Further paragraphs come after blank lines.
 Note that keeping the first subject line to 50 chars or less works well with: `git log --pretty=oneline`
 
 Some further recommendations for writing commit messages:
-[How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
-[Commit Message Guidelines](https://gist.github.com/abravalheri/34aeb7b18d61392251a2)
+
+[How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)  
+[Commit Message Guidelines](https://gist.github.com/abravalheri/34aeb7b18d61392251a2)  
 
 ### Categories
 
@@ -378,7 +399,7 @@ Be aware that amending the commit message will result in a new commit with a new
 
 ## Git and Github identity information
 
-Add your Github name and email address (note: your email here must match the primary one you have set on your Github account in order for your commits to register on their heatmap):  
+Add your Github name and email address (note: your email here must match the primary one you have set on your Github account in order for your commits to register on their heatmap):
 ```
 git config --global user.email "email@example.com"
 git config --global user.name "Your Name"
@@ -490,52 +511,52 @@ Different organizations will have their own preferred methods of managing git lo
 
 ### Testing/editing locally
 
-- `git fetch`  
-- `git checkout origin/master`  
-- `git checkout -b CP-123-wip`  
-- `git branch -u origin/master`  
+- `git fetch`
+- `git checkout origin/master`
+- `git checkout -b CP-123-wip`
+- `git branch -u origin/master`
 
 Do work and commit as much as you want (no pushing), then:
 
-- `git pull`  
-- `git status` *(ahead by x commits)*  
-- `git rebase -i HEAD~x`  
+- `git pull`
+- `git status` *(ahead by x commits)*
+- `git rebase -i HEAD~x`
 
 > Note if you were ahead by more than one commit, the rebase command will prompt you amend the commit message so that you can write it in the organizations preferred format e.g. `CP-123: This is my formal commit message`. If you were only ahead by 1 commit in the first place, don't bother rebasing but *do* amend your last commit message if necessary using `git commit --amend`.
 
-- `git status` *(ahead by 1 commit)*  
-- `git push origin HEAD:CP-123`  
+- `git status` *(ahead by 1 commit)*
+- `git push origin HEAD:CP-123`
 
 Repeat
 
 ### Testing/editing locally and on a Raspberry Pi
 
-Assuming I've created a local branch using:  
+Assuming I've created a local branch using:
 ```
 git checkout -b CP-123-wip
 ```
 
-And I'm following the master branch:  
+And I'm following the master branch:
 ```
 git branch -u origin/master
 ```
 
-If I want to test my current local branch's code on a raspberry pi:  
+If I want to test my current local branch's code on a raspberry pi:
 ```
 git push origin HEAD:CP-123-wip
 ```
 
-On the raspberry pi, **clone the repository**, then:  
+On the raspberry pi, **clone the repository**, then:
 ```
 git checkout origin/CP-123-wip
 ```
 
-If I want to make changes there on the pi, commit as normal then when ready:  
+If I want to make changes there on the pi, commit as normal then when ready:
 ```
 git push origin HEAD:CP-123-wip
 ```
 
-Now locally you should be able to pull down those changes:  
+Now locally you should be able to pull down those changes:
 ```
 git pull origin CP-123-wip
 ```
