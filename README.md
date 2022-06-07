@@ -72,7 +72,7 @@ As noted above `fetch` and `merge` are two separate steps that make up a `pull`.
 
 View a commits diffs before merging, for example:
 
-```
+```bash
 git fetch
 From https://github.com/jessicarush/git-notes
    8b684ad..4f87800  master     -> origin/master
@@ -113,7 +113,8 @@ At this point if you look at the actual files in your working directory you'll s
 1. go back to your most recent commit like so:  `git checkout master`  –– this puts your head (and files) back to the end of the master branch. Once here, you may then decide you want to `git reset` or `git revert`.
 
 2. create a new *branch* from this previous commit state with the intention of continuing to make changes and eventually merging back into the master branch. It might look something like this:
-```
+
+```bash
 git checkout [commit]
 git checkout -b mybranch
 ...making changes...
@@ -153,7 +154,7 @@ The git revert command is a forward-moving undo operation that offers a safe met
 
 When you run this command, your editor will open up for a commit message. You can leave it at the default which is 'revert: commit message'. Here's an example:
 
-```
+```bash
 git revert 13978d2
 git log --oneline
 
@@ -169,7 +170,7 @@ a114858 Initial commit
 
 Create a new branch and switch over to it:
 
-```
+```bash
 git branch new_features
 git checkout new_features
 ```
@@ -177,13 +178,13 @@ git checkout new_features
 Make your changes as you normally would, `add` and `commit` as normal.
 To push your new branch to your remote repo:
 
-```
+```bash
 git push -u origin new_features
 ```
 
 If you want to rename a branch:
 
-```
+```bash
 git branch -m old-name new-name
 git push origin --delete old-name
 git push origin new-name
@@ -191,7 +192,7 @@ git push origin new-name
 
 When ready to merge your branch into the master branch:
 
-```
+```bash
 git checkout master
 git merge new_features
 git push
@@ -199,19 +200,19 @@ git push
 
 To list all your branches (local & remote):
 
-```
+```bash
 git branch -a
 ```
 
 To delete a local branch:
 
-```
+```bash
 git branch -d branch_name
 ```
 
 To delete a remote branch:
 
-```
+```bash
 git push origin --delete branch_name
 ```
 
@@ -237,49 +238,49 @@ coming soon...
 
 If you have un-staged, un-commited changes that you want to "save for later", you can stash them.
 
-```
+```bash
 git stash save "my description"
 ```
 
 To list your saved stashes:
 
-```
+```bash
 git stash list
 ```
 
 To show the diff of the most recent stash before applying:
 
-```
+```bash
 git stash show -p
 ```
 
 To show the diff of a specific stash before applying:
 
-```
+```bash
 git stash show -p stash@{1}
 ```
 
 To retrieve at stash:
 
-```
+```bash
 git stash apply stash@{0}
 ```
 
 The stash will still be saved though. If you want to remove it from the saved list:
 
-```
+```bash
 git stash drop stash@{0}
 ```
 
 To remove all the saved stashes:
 
-```
+```bash
 git stash clear
 ```
 
 To apply and remove the last stash:
 
-```
+```bash
 git stash pop
 ```
 
@@ -288,14 +289,14 @@ git stash pop
 
 To force a pull (and overwrite local diffs):
 
-```
+```bash
 git fetch --all
 git reset --hard origin/master
 ```
 
 To force a push (and overwrite remote diffs)
 
-```
+```bash
 git push origin <your_branch_name> --force
 ```
 
@@ -304,7 +305,7 @@ git push origin <your_branch_name> --force
 
 To have git ignore files or folders, create a file in the project root directory (where your `.git` folder lives) called `.gitignore` – then add a line for each file or folder you want to ignore, for example:
 
-```
+```bash
 __pycache__/
 .DS_Store
 /venv
@@ -313,7 +314,7 @@ __pycache__/
 
 Note that:
 
-```
+```bash
 # ignore all .a files
 *.a
 
@@ -335,13 +336,13 @@ doc/**/*.pdf
 
 Note if you add a new file to your git ignore that was previously being tracked, you will need to remove it from the index:
 
-```
+```bash
 git rm --cached <file>
 ```
 
 If you want to remove a whole directory, you need to remove all files in it recursively:
 
-```
+```bash
 git rm -r --cached <directory>
 ```
 
@@ -355,7 +356,7 @@ To learn more about the patterns that can be used for `.gitignore` files see:
 
 The preferred method of writing commit messages is:
 
-```
+```bash
 Capitalized, short (50 chars or less) summary
 
 More detailed explanation, if necessary. Keep line length to about 72
@@ -426,91 +427,107 @@ Be aware that amending the commit message will result in a new commit with a new
 ## Git and Github identity information
 
 Add your Github name and email address (note: your email here must match the primary one you have set on your Github account in order for your commits to register on their heatmap):
-```
+
+```bash
 git config --global user.email "email@example.com"
 git config --global user.name "Your Name"
 ```
 
 To confirm that you have set the email address correctly:
-```
+
+```bash
 git config --global user.email
 email@example.com
 ```
 
 If you want to change your name and email for a local repository only, navigate to the directory containing the git directory:
-```
+
+```bash
 git config user.email "email@example.com"
 git config user.name "Your Name"
 ```
 
 To confirm that you have set the email address correctly:
-```
+
+```bash
 git config user.email
 email@example.com
 ```
 
 To show the remote repository connected to your current working directory:
-```
+
+```bash
 git remote show origin
 ```
 
 To create a clone of a github repository:
-```
+
+```bash
 git clone https://github.com/USERNAME/REPOSITORY
 ```
 
 If you've added your public SSH keys to your github account:
-```
+
+```bash
 git clone git@github.com:USERNAME/REPOSITORY
 ```
 
 To link an existing local repo to a github repo:
-```
-$ git remote add origin https://github.com/USERNAME/REPOSITORY.git
+
+```bash
+git remote add origin https://github.com/USERNAME/REPOSITORY.git
 ```
 
 If you've added your public SSH keys to your github account:
-```
+
+```bash
 git remote add origin git@github.com:USERNAME/REPOSITORY.git
 ```
 
 Note: if you want to change the origin, edit the config file in the `.git` directory or you can run the command to delete the old origin, then add the new one with above command:
-```
+
+```bash
 git remote remove origin
 ```
 
 Be sure to push to your master branch after changing the remote:
-```
+
+```bash
 git push -u origin master
 ```
 
 The above requires that you have a master branch already created on
 github. If not you'll need to enter the following. You'll be prompted for a username and password (unless you set up SSH).
-```
+
+```bash
 git push --set-upstream origin master
 ```
 
 Finally, if you are trying to interact with a github repo and are still being asked to enter your username and password, you probably need to change the remote URL from HTTPS to SSH. To do this first check if you are using HTTPS:
-```
+
+```bash
 git remote -v
 > origin  https://github.com/USERNAME/REPOSITORY.git (fetch)
 > origin  https://github.com/USERNAME/REPOSITORY.git (push)
 ```
 
 Change your remote's URL from HTTPS to SSH with the `git remote set-url` command.
-```
+
+```bash
 git remote set-url origin git@github.com:USERNAME/REPOSITORY.git
 ```
 
 Verify that it's changed:
-```
+
+```bash
 git remote -v
 > origin  git@github.com:USERNAME/REPOSITORY.git (fetch)
 > origin  git@github.com:USERNAME/REPOSITORY.git (push)
 ```
 
 You can test that SSH is set up properly to Github with this command:
-```
+
+```bash
 ssh -T git@github.com
 ```
 
@@ -526,7 +543,8 @@ ssh -T git@github.com
 - `git push usb master`
 
 To clone that repo somewhere else:
-```
+
+```bash
 git clone /Volumes/flash_key_name/Python/myrepo.git
 ```
 
@@ -558,32 +576,38 @@ Repeat
 ### Testing/editing locally and on a Raspberry Pi
 
 Assuming I've created a local branch using:
-```
+
+```bash
 git checkout -b CP-123-wip
 ```
 
 And I'm following the master branch:
-```
+
+```bash
 git branch -u origin/master
 ```
 
 If I want to test my current local branch's code on a raspberry pi:
-```
+
+```bash
 git push origin HEAD:CP-123-wip
 ```
 
 On the raspberry pi, **clone the repository**, then:
-```
+
+```bash
 git checkout origin/CP-123-wip
 ```
 
 If I want to make changes there on the pi, commit as normal then when ready:
-```
+
+```bash
 git push origin HEAD:CP-123-wip
 ```
 
 Now locally you should be able to pull down those changes:
-```
+
+```bash
 git pull origin CP-123-wip
 ```
 
@@ -592,11 +616,13 @@ You can carry on editing back and forth between your local workspace and the pi 
 ## Miscellaneous commands
 
 When copying files from linux or Mac OS to Windows, permissions on files may get changed. Git may register these as changes and all files will show as being modified. If you don't want this use the following command:
-```
+
+```bash
 git config core.filemode false
 ```
 
 or
-```
+
+```bash
 git config --global core.filemode false
 ```
