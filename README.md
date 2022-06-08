@@ -352,6 +352,7 @@ To learn more about the patterns that can be used for `.gitignore` files see:
 - (Pro git book)[https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring]
 - (Git man pages)[https://git-scm.com/docs/gitignore]
 
+
 ## Commit messages
 
 The preferred method of writing commit messages is:
