@@ -227,6 +227,28 @@ git push origin --delete branch_name
 `git merge refactoring`  –– merge the branch into the branch you are currently in (for example: `git checkout master` first)
 
 
+## Setting the upstream branch 
+
+Note that in the command used above `git push -u <remote> <branch>`, we are actually setting the upstream branch to `<remote>` in addition to pushing.
+
+Upstream branches are useful because:
+
+- You get references to your remote repositories and you essentially know if you are ahead of them or not. When performing a “git fetch” command, you can bring the new commits from your remote repository and you can choose to merge them at will.
+- You can perform pull and push easily. When you set your upstream (or tracking) branches, you can simply execute pulls and pushes without having to specify the target branch.
+
+To set the upstream:
+
+```bash
+git branch -u <remote>/<branch>
+```
+
+To check what the upstreams have been set to for each branch:
+
+```bash
+git branch -vv
+```
+
+
 ## Rebase
 
 coming soon...
@@ -236,7 +258,7 @@ coming soon...
 
 ## Stashing
 
-If you have un-staged, un-commited changes that you want to "save for later", you can stash them.
+If you have un-staged, un-committed changes that you want to "save for later", you can stash them.
 
 ```bash
 git stash save "my description"
@@ -632,6 +654,7 @@ git pull origin CP-123-wip
 ```
 
 You can carry on editing back and forth between your local workspace and the pi using those two commands. When you're ready for a pull request, continue as normal with rebasing, etc.
+
 
 ## Miscellaneous commands
 
