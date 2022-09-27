@@ -328,7 +328,8 @@ git push origin <your_branch_name> --force
 To have git ignore files or folders, create a file in the project root directory (where your `.git` folder lives) called `.gitignore` – then add a line for each file or folder you want to ignore, for example:
 
 ```bash
-# See https://help.github.com/articles/ignoring-files/
+# https://git-scm.com/docs/gitignore
+# https://help.github.com/articles/ignoring-files/
 
 # dependencies
 /node_modules
