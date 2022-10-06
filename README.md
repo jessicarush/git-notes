@@ -91,11 +91,13 @@ These three commands will let you temporarily look back at earlier commits, rese
 
 Reset is the simplest if you want to revert all your files to an earlier commit and/or remove commits from your commit history. You have two main options using reset:
 
-`git reset [commit]`  –– this uses the default mode `--mixed` which removes all commits after [commit] in the history but preserves any changes made to your local files. If you do a `git status`, it will show as *changes not staged for commit*. As mentioned above `git reset filename.txt` is also a quick way to remove a file from the staging area.
+`git reset [commit]` –– this uses the default mode `--mixed` which removes all commits after [commit] in the history but preserves any changes made to your local files. If you do a `git status`, it will show as *changes not staged for commit*. As mentioned above `git reset filename.txt` is also a quick way to remove a file from the staging area.
 
-`git reset --soft [commit]`  –– is the same as above except all changes since [commit] will be staged and waiting for a new commit.
+`git reset --soft [commit]` –– is the same as above except all changes since [commit] will be staged and waiting for a new commit.
 
-`git reset --hard [commit]`  –– **BE CAREFUL** removes all commits after [commit] AND reverts local files back to what they were at the specified [commit]
+`git reset --hard [commit]` –– **BE CAREFUL** removes all commits after [commit] AND reverts local files back to what they were at the specified [commit]
+
+`git reset --hard HEAD~1` –– **BE CAREFUL** goes back one commit.
 
 If you're not sure which commit you want to reset to, use `git checkout` first. There are also mode flags `--merge` and `--keep`: [see the docs](https://git-scm.com/docs/git-reset).
 
