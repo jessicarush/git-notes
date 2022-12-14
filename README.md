@@ -672,3 +672,9 @@ or
 ```bash
 git config --global core.filemode false
 ```
+
+To print git log with author, date, commit message:
+
+```bash
+git log --pretty=format:"%h%x09%an%x09%ad%x09%s"
+``
