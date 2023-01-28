@@ -2,17 +2,17 @@
 # https://help.github.com/articles/ignoring-files/
 
 # dependencies
-/node_modules
+node_modules
 
 # bytecode compiled
-__pycache__/
+__pycache__
 
 # environments
 .env
-/venv
+venv
 
 # logs
-/logs
+logs
 
 # database
 app.db
