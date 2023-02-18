@@ -677,4 +677,26 @@ To print git log with author, date, commit message:
 
 ```bash
 git log --pretty=format:"%h%x09%an%x09%ad%x09%s"
-``
+```
+
+Gives some detail into the files that were modified:
+
+```bash
+git whatchanged 
+```
+
+Show the amount each file was changed:
+
+```bash
+git log --stat 
+```
+
+`git diff --stat <sha1> <sha2>` gives the files and the amount of changes between two commits.
+
+`git diff --stat <branch>` to compare to another branch (e.g. master)
+
+Compare Two Git Branches:
+
+```bash
+git diff <branch>...<branch> --ignore-all-space
+```
