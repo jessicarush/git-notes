@@ -22,6 +22,7 @@ These are some very brief and imperfect notes on working with git and github. Fo
     + [Alternate syntax:](#alternate-syntax)
   * [Revert](#revert)
 - [Branch](#branch)
+- [Setting the upstream branch](#setting-the-upstream-branch)
 - [Rebase](#rebase)
 - [Stashing](#stashing)
 - [Force Push and Pull](#force-push-and-pull)
@@ -33,7 +34,8 @@ These are some very brief and imperfect notes on working with git and github. Fo
 - [Git and Github identity information](#git-and-github-identity-information)
 - [Git remote origin on a flash key](#git-remote-origin-on-a-flash-key)
 - [A Specific Process Example](#a-specific-process-example)
-  * [Testing/editing locally](#testingediting-locally)
+  * [Working to create a single commit pull-request-ready branch](#working-to-create-a-single-commit-pull-request-ready-branch)
+  * [When someone else is commiting to master](#when-someone-else-is-commiting-to-master)
   * [Testing/editing locally and on a Raspberry Pi](#testingediting-locally-and-on-a-raspberry-pi)
 - [Miscellaneous commands](#miscellaneous-commands)
 
@@ -598,14 +600,14 @@ git clone /Volumes/flash_key_name/Python/myrepo.git
 
 Different organizations will have their own preferred methods of managing git logs. This example is one such method aimed at doing pull requests of 1 commit.
 
-### Testing/editing locally
+### Working to create a single commit pull-request-ready branch 
 
 - `git fetch`
 - `git checkout origin/master`
 - `git checkout -b CP-123-wip`
 - `git branch -u origin/master`
 
-Do work and commit as much as you want (no pushing), then:
+Do work and commit as much as you want (no pushing unless you want a backup), then:
 
 - `git pull`
 - `git status` *(ahead by x commits)*
@@ -613,10 +615,54 @@ Do work and commit as much as you want (no pushing), then:
 
 > Note if you were ahead by more than one commit, the rebase command will prompt you amend the commit message so that you can write it in the organizations preferred format e.g. `CP-123: This is my formal commit message`. If you were only ahead by 1 commit in the first place, don't bother rebasing but *do* amend your last commit message if necessary using `git commit --amend`.
 
+> In the interactive rebase pick the first one and squash the rest, the second step of the rebase will allow you to merge and modify the commit message.
+
 - `git status` *(ahead by 1 commit)*
 - `git push origin HEAD:CP-123`
 
-Repeat
+### When someone else is commiting to master
+
+In the above situation if the master branch has some features merged while you are working on your branch then you will need to pull down the new stuff and possibly resolve any conflicts before cherry-picking your work into a new commit:
+
+- `git fetch`
+- `git checkout origin/master`
+- `git checkout -b CP-123-wip`
+- `git branch -u origin/master`
+
+Do work and commit as much as you want (no pushing unless you want a backup), then:
+
+- `git checkout master`
+- `git pull`
+- `git checkout -b CP-123-wip`
+- `git status` *(diverdged, x commits on master and x commits on branch)*
+- `git rebase -i HEAD~x` *(x is number of commits on branch)*
+- `git status` *(diverdged, x commits on master and 1 commit on branch)*
+
+At this point, note the commit hash of the rebased branch. Then:
+
+- `git checkout -b CP-123`
+- `git branch -u origin/master`
+- `git cherry-pick <hash>`
+
+At this point you may have conflicts. Resolve them by doing:
+
+- `git status`
+
+Open the files and manually resolve any conflict sections:
+
+```
+<<<<<<< HEAD
+open an issue
+=======
+ask your question in IRC.
+>>>>>>> branch-a
+```
+
+Once you've resolves a file, save it and add it (`git add filename`). When all files are added, commit.
+
+Your new branch should now be one commit off the current master branch. 
+
+- `git push origin HEAD:CP-123`
 
 ### Testing/editing locally and on a Raspberry Pi
 
