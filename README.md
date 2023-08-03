@@ -746,3 +746,12 @@ Compare Two Git Branches:
 ```bash
 git diff <branch>...<branch> --ignore-all-space
 ```
+
+To rename `main` to `master`:
+
+```bash
+git branch -m main master
+git push -u origin master
+```
+
+If you already have a github repo, you'll want to go into the repo settings and manually set master as the default branch then delete teh main branch.
