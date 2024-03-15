@@ -35,9 +35,10 @@ These are some very brief and imperfect notes on working with git and github. Fo
 - [Git remote origin on a flash key](#git-remote-origin-on-a-flash-key)
 - [A Specific Process Example](#a-specific-process-example)
   * [Working to create a single commit pull-request-ready branch](#working-to-create-a-single-commit-pull-request-ready-branch)
-  * [When someone else is commiting to master](#when-someone-else-is-commiting-to-master)
+  * [When someone else is committing to master](#when-someone-else-is-committing-to-master)
   * [Testing/editing locally and on a Raspberry Pi](#testingediting-locally-and-on-a-raspberry-pi)
 - [Miscellaneous commands](#miscellaneous-commands)
+- [GitHub code search](#github-code-search)
 
 <!-- tocstop -->
 
@@ -45,27 +46,29 @@ These are some very brief and imperfect notes on working with git and github. Fo
 
 In the command line, make sure you're in the directory you want to repo first.
 
-`git init`  –– creates a new repo  
-`git add -A`  –– adds all files, (new, modified and deleted) to the staging area  
-`git add .`  –– adds all files, (new, modified) to the staging area  
-`git add filename.txt`  –– adds a specific file to the staging area  
-`git status`  –– shows you the staging area  
-`git reset filename.txt`  –– remove a staged file  
-`git commit`  –– takes you to your editor to write a commit comment. Once you save and close the file, the commit will complete  
-`git commit -m 'My comments'`  –– commits right away using the commit comments in quotes  
-`git commit --amend`  –– lets you include a file you forgot to include in the last commit (provided it hasn't been pushed yet). You need to add the file first with `git add filename.txt`. You can also run this command alone to make changes to your last commit message (again, provided it hasn't been pushed yet).  
-`git diff`  –– will show a basic diff of the modified files in the working directory  
-`git diff --staged`  –– show changes of a file in the staged area  
-`git diff <commit>^!`  –– show changes in a commit  
-`git difftools`  –– to look into - will do a diff using a better tool  
-`git log`  –– shows your commit log  
-`git log --oneline`  –– shows your commit log formatted as one line, with a shortened commithash  
-`git log --pretty=oneline`  –– shows your commit log formatted as one line with full length commithash  
-`git push`  –– pushes data from the local repository to the remote repository  
-`git fetch`  –– fetches data from the remote repository to the local repository  
-`git merge`  –– merges the data from the local repository into the working directory  
-`git pull`  –– (fetch + merge) fetches data from the remote repository to the local repository and then merges it to the working directory  
-`git remote -v` –– show remote repository
+command | description
+------- | -----------
+`git init` | creates a new repo  
+`git add -A` | adds all files, (new, modified and deleted) to the staging area  
+`git add .` | adds all files, (new, modified) to the staging area  
+`git add filename.txt` | adds a specific file to the staging area  
+`git status` | shows you the staging area  
+`git reset filename.txt` | remove a staged file  
+`git commit` | takes you to your editor to write a commit comment. Once you save and close the file, the commit will complete  
+`git commit -m 'My comments'` | commits right away using the commit comments in quotes  
+`git commit --amend` | lets you include a file you forgot to include in the last commit (provided it hasn't been pushed yet). You need to add the file first with `git add filename.txt`. You can also run this command alone to make changes to your last commit message (again, provided it hasn't been pushed yet).  
+`git diff` | will show a basic diff of the modified files in the working directory  
+`git diff --staged` | show changes of a file in the staged area  
+`git diff <commit>^!` | show changes in a commit  
+`git difftools` | to look into - will do a diff using a better tool  
+`git log` | shows your commit log  
+`git log --oneline` | shows your commit log formatted as one line, with a shortened commithash  
+`git log --pretty=oneline` | shows your commit log formatted as one line with full length commithash  
+`git push` | pushes data from the local repository to the remote repository  
+`git fetch` | fetches data from the remote repository to the local repository  
+`git merge` | merges the data from the local repository into the working directory  
+`git pull` | (fetch + merge) fetches data from the remote repository to the local repository and then merges it to the working directory  
+`git remote -v`| show remote repository
 
 
 ## Fetch and Merge
@@ -620,7 +623,7 @@ Do work and commit as much as you want (no pushing unless you want a backup), th
 - `git status` *(ahead by 1 commit)*
 - `git push origin HEAD:CP-123`
 
-### When someone else is commiting to master
+### When someone else is committing to master
 
 In the above situation if the master branch has some features merged while you are working on your branch then you will need to pull down the new stuff and possibly resolve any conflicts before cherry-picking your work into a new commit:
 
@@ -754,4 +757,13 @@ git branch -m main master
 git push -u origin master
 ```
 
-If you already have a github repo, you'll want to go into the repo settings and manually set master as the default branch then delete teh main branch.
+If you already have a github repo, you'll want to go into the repo settings and manually set master as the default branch then delete the main branch.
+
+## GitHub code search 
+
+GitHIb now includes all kinds of syntax for specific code searches. Here are some examples:
+
+search query | description
+------------ | -----------
+kysely path:**/package.json | search for `kysely` in any `package.json`.
+
