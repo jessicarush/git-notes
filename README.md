@@ -48,26 +48,26 @@ In the command line, make sure you're in the directory you want to repo first.
 
 command | description
 ------- | -----------
-`git init` | creates a new repo  
-`git add -A` | adds all files, (new, modified and deleted) to the staging area  
-`git add .` | adds all files, (new, modified) to the staging area  
-`git add filename.txt` | adds a specific file to the staging area  
-`git status` | shows you the staging area  
-`git reset filename.txt` | remove a staged file  
-`git commit` | takes you to your editor to write a commit comment. Once you save and close the file, the commit will complete  
-`git commit -m 'My comments'` | commits right away using the commit comments in quotes  
-`git commit --amend` | lets you include a file you forgot to include in the last commit (provided it hasn't been pushed yet). You need to add the file first with `git add filename.txt`. You can also run this command alone to make changes to your last commit message (again, provided it hasn't been pushed yet).  
-`git diff` | will show a basic diff of the modified files in the working directory  
-`git diff --staged` | show changes of a file in the staged area  
-`git diff <commit>^!` | show changes in a commit  
-`git difftools` | to look into - will do a diff using a better tool  
-`git log` | shows your commit log  
-`git log --oneline` | shows your commit log formatted as one line, with a shortened commithash  
-`git log --pretty=oneline` | shows your commit log formatted as one line with full length commithash  
-`git push` | pushes data from the local repository to the remote repository  
-`git fetch` | fetches data from the remote repository to the local repository  
-`git merge` | merges the data from the local repository into the working directory  
-`git pull` | (fetch + merge) fetches data from the remote repository to the local repository and then merges it to the working directory  
+`git init` | creates a new repo
+`git add -A` | adds all files, (new, modified and deleted) to the staging area
+`git add .` | adds all files, (new, modified) to the staging area
+`git add filename.txt` | adds a specific file to the staging area
+`git status` | shows you the staging area
+`git reset filename.txt` | remove a staged file
+`git commit` | takes you to your editor to write a commit comment. Once you save and close the file, the commit will complete
+`git commit -m 'My comments'` | commits right away using the commit comments in quotes
+`git commit --amend` | lets you include a file you forgot to include in the last commit (provided it hasn't been pushed yet). You need to add the file first with `git add filename.txt`. You can also run this command alone to make changes to your last commit message (again, provided it hasn't been pushed yet).
+`git diff` | will show a basic diff of the modified files in the working directory
+`git diff --staged` | show changes of a file in the staged area
+`git diff <commit>^!` | show changes in a commit
+`git difftools` | to look into - will do a diff using a better tool
+`git log` | shows your commit log
+`git log --oneline` | shows your commit log formatted as one line, with a shortened commithash
+`git log --pretty=oneline` | shows your commit log formatted as one line with full length commithash
+`git push` | pushes data from the local repository to the remote repository
+`git fetch` | fetches data from the remote repository to the local repository
+`git merge` | merges the data from the local repository into the working directory
+`git pull` | (fetch + merge) fetches data from the remote repository to the local repository and then merges it to the working directory
 `git remote -v`| show remote repository
 
 
@@ -96,13 +96,14 @@ These three commands will let you temporarily look back at earlier commits, rese
 
 Reset is the simplest if you want to revert all your files to an earlier commit and/or remove commits from your commit history. You have two main options using reset:
 
-`git reset [commit]` –– this uses the default mode `--mixed` which removes all commits after [commit] in the history but preserves any changes made to your local files. If you do a `git status`, it will show as *changes not staged for commit*. As mentioned above `git reset filename.txt` is also a quick way to remove a file from the staging area.
-
-`git reset --soft [commit]` –– is the same as above except all changes since [commit] will be staged and waiting for a new commit.
-
-`git reset --hard [commit]` –– **BE CAREFUL** removes all commits after [commit] AND reverts local files back to what they were at the specified [commit]
-
-`git reset --hard HEAD~1` –– **BE CAREFUL** goes back one commit.
+command | description
+------- | -----------
+`git reset` | Resets the staging area to match the specified commit but keeps changes in the working directory.
+`git reset --hard` | **BE CAREFUL** Resets the working directory and the staging area to match the current HEAD commit. After you have done this you can run `git clean -fd` to remove any untracked and directories.
+`git reset [commit]` | Uses the default mode `--mixed` which removes all commits after [commit] in the history but preserves any changes made to your local files. If you do a `git status`, it will show as *changes not staged for commit*.
+`git reset --soft [commit]` | The same as above except all changes since [commit] will be staged and waiting for a new commit.
+`git reset --hard [commit]` | **BE CAREFUL** Removes all commits after [commit] AND reverts local files back to what they were at the specified [commit]
+`git reset --hard HEAD~1` | **BE CAREFUL** Goes back one commit.
 
 If you're not sure which commit you want to reset to, use `git checkout` first. There are also mode flags `--merge` and `--keep`: [see the docs](https://git-scm.com/docs/git-reset).
 
@@ -113,7 +114,7 @@ While this is mainly used for switching branches, `checkout` also lets you look 
 
 #### If you want to look at all the files
 
-`git checkout [commit]`  –– temporarily reverts all local files to [commit]  
+`git checkout [commit]` – temporarily reverts all local files to [commit]  
 
 At this point if you look at the actual files in your working directory you'll see that  they're rolled back to [commit] but know this state is not permanent. You are in what's called a *detached head state*. You can do some things in this state, including running the code, test changes, checking out other commit states but ultimately, when you're done, you'll most likely do one of two things:
 
@@ -135,7 +136,7 @@ Depending on your changes, you will likely have merge conflicts so you'll have t
 
 #### If you want to look at a single file
 
-`git checkout [commit] filename.txt`  –– reverts a file to [commit]
+`git checkout [commit] filename.txt` – reverts a file to [commit]
 
 The difference here when we just checkout a single file, is that we're NOT in a *detached head state* meaning it's pretty much business as usual. Your file has been reverted back to a previous commit so at this point you can do one of two things:
 
@@ -147,8 +148,8 @@ The difference here when we just checkout a single file, is that we're NOT in a 
 
 Note that when indicating a commit to checkout to, you can also use this syntax:
 
-`git checkout HEAD~2`  –– checkout two parent commits ago  
-`git checkout HEAD~2 filename.txt`  –– checkout a file from two parent commits ago  
+`git checkout HEAD~2` – checkout two parent commits ago  
+`git checkout HEAD~2 filename.txt` – checkout a file from two parent commits ago  
 
 You can also use `^` to differentiate between merged branch parents, but tbh I find it a little confusing. [Here's an explanation](http://www.paulboxley.com/blog/2011/06/git-caret-and-tilde) but I'm sticking with commit hashes.
 
@@ -225,13 +226,15 @@ git push origin --delete branch_name
 
 **Summary:**
 
-`git branch refactoring`  –– creates a new branch called 'refactoring'  
-`git checkout refactoring`  –– moves over to the new branch and updates the working directory  
-`git checkout -b refactoring`  –– creates a new branch and move over to it in one step.  
-`git push --set-upstream origin refactoring`  –– add your new branch to the the remote repo  
-`git pull origin refactoring`  –– to pull from a branch  
-`git branch`  –– display the names of all the branches (the starred one is your current one)  
-`git merge refactoring`  –– merge the branch into the branch you are currently in (for example: `git checkout master` first)
+command | description
+------- | -----------
+`git branch refactoring` | creates a new branch called 'refactoring'
+`git checkout refactoring` | moves over to the new branch and updates the working directory
+`git checkout -b refactoring` | creates a new branch and move over to it in one step.
+`git push --set-upstream origin refactoring` | add your new branch to the the remote repo
+`git pull origin refactoring` | to pull from a branch
+`git branch` | display the names of all the branches (the starred one is your current one)
+`git merge refactoring` | merge the branch into the branch you are currently in (for example: `git checkout master` first)
 
 
 ## Setting the upstream branch 
@@ -260,7 +263,7 @@ git branch -vv
 
 coming soon...
 
-`git pull --rebase`  –– instead of performing a regular `fetch` + `merge`, this will do a `fetch` + `rebase`
+`git pull --rebase` | instead of performing a regular `fetch` + `merge`, this will do a `fetch` + `rebase`
 
 
 ## Stashing
