@@ -608,55 +608,83 @@ Different organizations will have their own preferred methods of managing git lo
 
 ### Working to create a single commit pull-request-ready branch 
 
-- `git fetch`
-- `git checkout origin/master`
-- `git checkout -b CP-123-wip`
-- `git branch -u origin/master`
+```bash
+git fetch
+git checkout origin/master
+git checkout -b CP-123-wip
+git branch -u origin/master
+```
 
 Do work and commit as much as you want (no pushing unless you want a backup), then:
 
-- `git pull`
-- `git status` *(ahead by x commits)*
-- `git rebase -i HEAD~x`
+```bash
+git pull
+git status 
+# ahead by x commits
+git rebase -i HEAD~x
+```
 
 > Note if you were ahead by more than one commit, the rebase command will prompt you amend the commit message so that you can write it in the organizations preferred format e.g. `CP-123: This is my formal commit message`. If you were only ahead by 1 commit in the first place, don't bother rebasing but *do* amend your last commit message if necessary using `git commit --amend`.
 
-> In the interactive rebase pick the first one and squash the rest, the second step of the rebase will allow you to merge and modify the commit message.
+> In the interactive rebase `pick` the first one and `squash` the rest, the second step of the rebase will allow you to merge and modify the commit message.
 
-- `git status` *(ahead by 1 commit)*
-- `git push origin HEAD:CP-123`
+```bash
+git status
+# ahead by 1 commit
+git push origin HEAD:CP-123
+```
+
+`git push`:
+- Relies on the upstream configuration.
+- Pushes changes to the branch that the current branch is tracking.
+- Simplifies the workflow by reducing the need for additional specification.
+
+`git push origin HEAD:feature`:
+- Explicitly specifies the source (HEAD, which is your current branch) and the destination (feature on origin). If you weren't currently on the branch you could do `git push origin dev_feature:feature`.
+- Can be used to push to a branch that may not be the configured upstream.
+- Useful for creating new branches on the remote or when upstream is not set.
 
 ### When someone else is committing to master
 
 In the above situation if the master branch has some features merged while you are working on your branch then you will need to pull down the new stuff and possibly resolve any conflicts before cherry-picking your work into a new commit:
 
-- `git fetch`
-- `git checkout origin/master`
-- `git checkout -b CP-123-wip`
-- `git branch -u origin/master`
+```bash
+git fetch
+git checkout origin/master
+git checkout -b CP-123-wip
+git branch -u origin/master
+```
 
 Do work and commit as much as you want (no pushing unless you want a backup), then:
 
-- `git checkout master`
-- `git pull`
-- `git checkout -b CP-123-wip`
-- `git status` *(diverdged, x commits on master and x commits on branch)*
-- `git rebase -i HEAD~x` *(x is number of commits on branch)*
-- `git status` *(diverdged, x commits on master and 1 commit on branch)*
+```bash
+git checkout master
+git pull
+git checkout -b CP-123-wip
+git status
+# diverged, x commits on master and x commits on branch
+git rebase -i HEAD~x # where x is number of commits on branch
+git status 
+# diverged, x commits on master and 1 commit on branch
+```
 
 At this point, note the commit hash of the rebased branch. Then:
 
-- `git checkout -b CP-123`
-- `git branch -u origin/master`
-- `git cherry-pick <hash>`
+```bash
+git checkout -b CP-123
+git branch -u origin/master
+git cherry-pick <hash>
+```
 
 At this point you may have conflicts. Resolve them by doing:
 
-- `git status`
+```bash
+git status
+```
 
 Open the files and manually resolve any conflict sections:
 
-```
+```bash
 <<<<<<< HEAD
 open an issue
 =======
@@ -668,7 +696,9 @@ Once you've resolves a file, save it and add it (`git add filename`). When all f
 
 Your new branch should now be one commit off the current master branch. 
 
-- `git push origin HEAD:CP-123`
+```bash
+git push origin HEAD:CP-123
+```
 
 ### Testing/editing locally and on a Raspberry Pi
 
@@ -764,7 +794,7 @@ If you already have a github repo, you'll want to go into the repo settings and 
 
 ## GitHub code search 
 
-GitHIb now includes all kinds of syntax for specific code searches. Here are some examples:
+GitHub now includes all kinds of syntax for specific code searches. Here are some examples:
 
 search query | description
 ------------ | -----------
