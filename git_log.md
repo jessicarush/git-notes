@@ -125,5 +125,5 @@ git log --no-merges
 Combine options to get more customized output. For instance, to view a one-line graph of commits by a specific author since a certain date:
 
 ```bash
-git log --oneline --graph --author="Jane Doe" --since="1 month ago"
+git log --since="2023-01-01" --until="2023-12-31" --decorate > git_log_2023.txt
 ```
