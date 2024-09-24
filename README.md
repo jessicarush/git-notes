@@ -68,7 +68,8 @@ command | description
 `git fetch` | fetches data from the remote repository to the local repository
 `git merge` | merges the data from the local repository into the working directory
 `git pull` | (fetch + merge) fetches data from the remote repository to the local repository and then merges it to the working directory
-`git remote -v`| show remote repository
+`git remote -v` | show remote repository
+`git reset --hard HEAD@{1}` | undo last operation that moved the HEAD, such as a merge, a reset, or commit
 
 
 ## Fetch and Merge
