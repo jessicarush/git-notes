@@ -33,10 +33,13 @@ These are some very brief and imperfect notes on working with git and github. Fo
   * [Summary](#summary)
 - [Git and Github identity information](#git-and-github-identity-information)
 - [Git remote origin on a flash key](#git-remote-origin-on-a-flash-key)
-- [A Specific Process Example](#a-specific-process-example)
+- [Specific Process Examples](#specific-process-examples)
   * [Working to create a single commit pull-request-ready branch](#working-to-create-a-single-commit-pull-request-ready-branch)
   * [When someone else is committing to master](#when-someone-else-is-committing-to-master)
   * [Testing/editing locally and on a Raspberry Pi](#testingediting-locally-and-on-a-raspberry-pi)
+  * [Local merge then cleanup](#local-merge-then-cleanup)
+  * [Remote merge via GitHub](#remote-merge-via-github)
+  * [Merge Types](#merge-types)
 - [Miscellaneous commands](#miscellaneous-commands)
 - [GitHub code search](#github-code-search)
 
@@ -603,7 +606,7 @@ git clone /Volumes/flash_key_name/Python/myrepo.git
 ```
 
 
-## A Specific Process Example
+## Specific Process Examples
 
 Different organizations will have their own preferred methods of managing git logs. This example is one such method aimed at doing pull requests of 1 commit.
 
@@ -741,6 +744,73 @@ git pull origin CP-123-wip
 
 You can carry on editing back and forth between your local workspace and the pi using those two commands. When you're ready for a pull request, continue as normal with rebasing, etc.
 
+### Local merge then cleanup 
+
+```bash
+# Switch to master and merge
+git checkout master
+git pull origin master    # Get latest master
+git merge my-branch       # Merge your branch
+git push origin master    # Push merged master
+
+# Delete the remote branch
+git push origin --delete my-branch
+
+# Delete local branch (optional)
+git branch -d my-branch
+```
+
+### Remote merge via GitHub
+
+Create a Pull Request:
+
+- Go to your GitHub repo
+- Click "Compare & pull request" (if prompted) or "New pull request"
+- Set base branch to master and compare branch to my-branch
+- Fill out PR details and create it
+
+Merge the PR:
+
+- Review/approve the PR
+- Click "Merge pull request" (choose merge type: merge commit, squash, or rebase)
+- Optionally check "Delete branch" to auto-delete the remote branch
+
+Local cleanup:
+
+```bash
+git checkout master
+git pull origin master     # Get the merged changes
+git branch -d my-branch    # Delete local branch
+```
+
+### Merge Types
+
+Merge commit:
+
+- Creates a new commit that joins the two branches
+- Preserves the entire commit history of your feature branch
+- Results in a "diamond" shape in git history
+- Good for: keeping detailed development history
+
+Squash and merge:
+
+- Combines all commits from your feature branch into a single new commit on master
+- Loses individual commit history from the feature branch
+- Results in linear history on master
+- Good for: clean master history when feature branch has many small/messy commits
+
+Rebase and merge:
+
+- Replays each commit from your feature branch onto master individually
+- Preserves individual commits but rewrites their history (new commit hashes)
+- Results in linear history that looks like commits were made directly on master
+- Good for: linear history while keeping individual commit messages
+
+Quick decision guide:
+
+- Many small commits during development? → Squash
+- Clean, meaningful commits you want to preserve? → Rebase
+- Want to preserve the branching context? → Merge commit
 
 ## Miscellaneous commands
 
