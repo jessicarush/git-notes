@@ -617,6 +617,8 @@ git fetch
 git checkout origin/master
 git checkout -b CP-123-wip
 git branch -u origin/master
+# or (haven't tried this yet... it should push the branch and normal pushes go there)
+git push -u origin CP-123-wip 
 ```
 
 Do work and commit as much as you want (no pushing unless you want a backup), then:
